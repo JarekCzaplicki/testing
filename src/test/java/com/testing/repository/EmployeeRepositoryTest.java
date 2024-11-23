@@ -101,4 +101,36 @@ class EmployeeRepositoryTest {
         assertThat(optionalEmployee.isPresent()).isTrue();
         assertThat(optionalEmployee.get()).isEqualTo(employee);
     }
+
+    @Test
+    @DisplayName("Find a employee by his email address")
+    void givenEmployee_whenFindEmployeeByEmail_thenReturnEmployee() {
+        // given
+        employee.setEmail("Jarek");
+        employeeRepository.save(employee);
+
+        // when
+        Optional<Employee> optionalEmployee = employeeRepository.findByEmail(employee.getEmail());
+
+        //then
+        assertThat(optionalEmployee.isPresent()).isTrue();
+        assertThat(optionalEmployee.get()).isEqualTo(employee);
+    }
+    @Test
+    @DisplayName("Updating employee fields")
+    void givenEmployee_whenUpdateEmployee_thenReturnUpdatedEmployee() {
+        // given
+        employeeRepository.save(employee);
+        Employee savedEmployee = employeeRepository.findById(employee.getId()).get();
+        savedEmployee.setEmail("somthing@else");
+        savedEmployee.setFirstName("Katarina");
+        // when
+        Employee updatedEmployee = employeeRepository.save(savedEmployee);
+
+        // then
+        assertThat(updatedEmployee).isNotNull();
+        assertThat(updatedEmployee.getFirstName()).isEqualTo("Katarina");
+        assertThat(updatedEmployee.getEmail()).isEqualTo(savedEmployee.getEmail());
+    }
+
 }
