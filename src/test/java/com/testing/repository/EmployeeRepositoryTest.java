@@ -7,7 +7,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import java.util.List;
 import java.util.Optional;
@@ -116,6 +115,7 @@ class EmployeeRepositoryTest {
         assertThat(optionalEmployee.isPresent()).isTrue();
         assertThat(optionalEmployee.get()).isEqualTo(employee);
     }
+
     @Test
     @DisplayName("Updating employee fields")
     void givenEmployee_whenUpdateEmployee_thenReturnUpdatedEmployee() {
@@ -131,6 +131,19 @@ class EmployeeRepositoryTest {
         assertThat(updatedEmployee).isNotNull();
         assertThat(updatedEmployee.getFirstName()).isEqualTo("Katarina");
         assertThat(updatedEmployee.getEmail()).isEqualTo(savedEmployee.getEmail());
+    }
+
+    @Test
+    @DisplayName("Find employee by his first name and last name")
+    void givenEmployee_whenFindEmployeeByFirstNameAndLastName_thenReturnEmployee() {
+        // given
+        employeeRepository.save(employee);
+        // when
+        Employee foundEmployee = employeeRepository.findByFirstNameAndLastName(employee.getFirstName(), employee.getLastName()).get();
+
+        // then
+        assertThat(foundEmployee).isNotNull();
+        assertThat(foundEmployee).isEqualTo(employee);
     }
 
 }
