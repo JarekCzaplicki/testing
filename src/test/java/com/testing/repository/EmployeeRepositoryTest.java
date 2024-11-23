@@ -1,11 +1,13 @@
 package com.testing.repository;
 
 import com.testing.entity.Employee;
+import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import java.util.List;
 
@@ -20,11 +22,17 @@ class EmployeeRepositoryTest {
     //      then - verification of the test results
     @Autowired
     private EmployeeRepository employeeRepository;
+    @Autowired
+    private EntityManager entityManager;
     private Employee employee;
 
     @BeforeEach
     void setUp() {
         employeeRepository.deleteAll();
+        entityManager.createNativeQuery(
+                "ALTER TABLE employees ALTER COLUMN id RESTART WITH 1"
+        ).executeUpdate();
+
         employee = new Employee(); // id = null and email = null
         employee.setFirstName("John");
         employee.setLastName("Doe");
