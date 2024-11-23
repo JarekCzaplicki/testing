@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -85,5 +86,19 @@ class EmployeeRepositoryTest {
 
         // then
         assertThat(employeeList.size()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("Find a employee by his id number")
+    void givenEmployee_whenFindEmployeeById_thenReturnEmployee() {
+        // given
+        employeeRepository.save(employee);
+
+        // when
+        Optional<Employee> optionalEmployee = employeeRepository.findById(1L);
+
+        //then
+        assertThat(optionalEmployee.isPresent()).isTrue();
+        assertThat(optionalEmployee.get()).isEqualTo(employee);
     }
 }
