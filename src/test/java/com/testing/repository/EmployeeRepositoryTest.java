@@ -24,6 +24,7 @@ class EmployeeRepositoryTest {
 
     @BeforeEach
     void setUp() {
+        employeeRepository.deleteAll();
         employee = new Employee(); // id = null and email = null
         employee.setFirstName("John");
         employee.setLastName("Doe");
