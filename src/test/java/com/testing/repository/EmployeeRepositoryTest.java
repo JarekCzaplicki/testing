@@ -146,4 +146,30 @@ class EmployeeRepositoryTest {
         assertThat(foundEmployee).isEqualTo(employee);
     }
 
+    @Test
+    @DisplayName("Find employee by his first name and last name (JPQL)")
+    void givenEmployee_whenFindEmployeeByFirstNameAndLastNameJPQL_thenReturnEmployee() {
+        // given
+        employeeRepository.save(employee);
+        // when
+        Employee foundEmployee = employeeRepository.findByFirstNameAndLastNameJPQL(employee.getFirstName(), employee.getLastName()).get();
+
+        // then
+        assertThat(foundEmployee).isNotNull();
+        assertThat(foundEmployee).isEqualTo(employee);
+    }
+
+    @Test
+    @DisplayName("Find employee by his first name and last name (native SQL)")
+    void givenEmployee_whenFindEmployeeByFirstNameAndLastNameNativeSQL_thenReturnEmployee() {
+        // given
+        employeeRepository.save(employee);
+        // when
+        Employee foundEmployee = employeeRepository.findByFirstNameAndLastNameNativeSQL(employee.getFirstName(), employee.getLastName()).get();
+
+        // then
+        assertThat(foundEmployee).isNotNull();
+        assertThat(foundEmployee).isEqualTo(employee);
+    }
+
 }
