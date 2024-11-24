@@ -154,7 +154,7 @@ class EmployeeServiceTest {
 
     @Test
     @DisplayName("Deleting an employee by his id")
-    void x() {
+    void givenEmployee_whenDeleteById_thenVerifyUsedOnce() {
         // given
         long employeeId = 1L;
         willDoNothing().given(employeeRepository).deleteById(employeeId);
