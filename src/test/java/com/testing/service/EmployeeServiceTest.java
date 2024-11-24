@@ -151,4 +151,18 @@ class EmployeeServiceTest {
         assertThat(updatedEmployee.getEmail()).isEqualTo("123@123");
         assertThat(updatedEmployee.getFirstName()).isEqualTo("Test");
     }
+
+    @Test
+    @DisplayName("Deleting an employee by his id")
+    void x() {
+        // given
+        long employeeId = 1L;
+        willDoNothing().given(employeeRepository).deleteById(employeeId);
+
+        // when
+        employeeService.deleteById(employeeId);
+
+        // then
+        verify(employeeRepository, times(1)).deleteById(employeeId);
+    }
 }
