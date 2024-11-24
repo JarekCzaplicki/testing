@@ -125,4 +125,51 @@ class EmployeeControllerTest {
                 .andExpect(status().isNotFound());
     }
 
+    @Test
+    @DisplayName("Updating an employee")
+    void updateEmployee() throws Exception {
+        // given
+        Employee employee = new Employee("1111", "22222", "121212");
+        given(employeeService.update(employee)).willReturn(employee);
+
+        // when
+        ResultActions response = mockMvc.perform(put("/api/employee")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(employee)));
+
+        // then
+        response
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("Deleting an employee")
+    void deleteEmployee() throws Exception {
+        // given
+        willDoNothing().given(employeeService).deleteById(anyLong());
+
+        // when
+        ResultActions response = mockMvc.perform(delete("/api/employee/{id}", 1L));
+
+        // then
+        response.andDo(print()).andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("Deleting an employee witch returned information")
+    void deleteEmployeewithChec() throws Exception {
+        // given
+        // delete an employee
+        // find an employee by his id
+        // for id on witch the employee was deleted it will give my back an 'not found'
+
+
+        // when
+
+
+        // then
+
+    }
+
 }

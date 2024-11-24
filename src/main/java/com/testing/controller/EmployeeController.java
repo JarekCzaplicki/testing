@@ -3,6 +3,7 @@ package com.testing.controller;
 import com.testing.entity.Employee;
 import com.testing.service.EmployeeService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,7 +29,28 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public Employee findById(@PathVariable Long id) {
-        return employeeService.findById(id).orElseGet(Employee::new);
+    public ResponseEntity<Employee> findById(@PathVariable Long id) {
+        return employeeService.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping
+    public ResponseEntity<Employee> update(@RequestBody Employee employee) {
+        return new ResponseEntity<>(employeeService.update(employee), HttpStatus.OK);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        employeeService.deleteById(id);
+        return new ResponseEntity<>("Employee with id " + id + " deleted",
+                HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Employee> deleteByIdV2(@PathVariable Long id) {
+        return employeeService.deleteByIdV2(id)
+                .map(ResponseEntity::notFound)
+                .orElse(ResponseEntity.ok());
     }
 }

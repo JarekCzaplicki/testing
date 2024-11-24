@@ -39,4 +39,9 @@ public class EmployeeService {
     public void deleteById(long employeeId) {
         employeeRepository.deleteById(employeeId);
     }
+
+    public Optional<Employee> deleteByIdV2(long employeeId) {
+        employeeRepository.deleteById(employeeId);
+        return employeeRepository.findById(employeeId);
+    }
 }
