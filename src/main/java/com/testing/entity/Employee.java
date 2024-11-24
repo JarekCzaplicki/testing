@@ -33,7 +33,7 @@ public class Employee {
         this.email = email;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
