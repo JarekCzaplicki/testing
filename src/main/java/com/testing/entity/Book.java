@@ -4,13 +4,14 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "books")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String title;
 
@@ -32,18 +33,4 @@ public class Book {
             , joinColumns = @JoinColumn(name = "book_id"))
     private List<Integer> ratings; // 4, 5, 6, 7, 8,
 
-    public Book() {
-    }
-
-    public Book(long id, String title, String author, String isbn, int publishedYear, String genre, BigDecimal price, Boolean available, List<Integer> ratings) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.isbn = isbn;
-        this.publishedYear = publishedYear;
-        this.genre = genre;
-        this.price = price;
-        this.available = available;
-        this.ratings = ratings;
-    }
-}
+  }

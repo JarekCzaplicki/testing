@@ -10,7 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import java.math.BigDecimal;
 import java.util.Arrays;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
@@ -29,7 +29,7 @@ class BookRepositoryTest {
                 "1234567",
                 1999,
                 "SyFy",
-                new BigDecimal("49,99"),
+                new BigDecimal("49.99"),
                 true,
                 Arrays.asList(5, 7, 8, 2, 1)
         );
