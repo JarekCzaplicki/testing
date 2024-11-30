@@ -1,11 +1,18 @@
 package com.testing.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
+// lombok
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+// Hibernate
 @Entity
 @Table(name = "books")
 public class Book {
