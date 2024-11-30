@@ -47,10 +47,10 @@ public class EmployeeController {
                 HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Employee> deleteByIdV2(@PathVariable Long id) {
-        return employeeService.deleteByIdV2(id)
-                .map(ResponseEntity::notFound)
-                .orElse(ResponseEntity.ok());
-    }
+//    @DeleteMapping("/delete/{id}")
+//    public ResponseEntity<Employee> deleteByIdV2(@PathVariable Long id) {
+//        return employeeService.deleteByIdV2(id)
+//                .map(ResponseEntity::notFound)
+//                .orElse(ResponseEntity.ok());
+//    }
 }

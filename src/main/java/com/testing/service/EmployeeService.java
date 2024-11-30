@@ -2,6 +2,7 @@ package com.testing.service;
 
 import com.testing.entity.Employee;
 import com.testing.repository.EmployeeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

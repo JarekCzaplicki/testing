@@ -28,8 +28,22 @@ public class Book {
     private Boolean available;
 
     @ElementCollection
-    @CollectionTable(name = "book_ratings" // nazwa tabeli, jaka będzie przechowywać elementy kolekcji 'rating'
+    @CollectionTable(name = "book_ratings"
             , joinColumns = @JoinColumn(name = "book_id"))
-// określa kolumnę w tabeli 'book_ratings', która będzie służyła za klucz obcy (foreign key) do identyfikacji powiązania z encją nadrzędną, czyli z 'Book'
-    private List<Integer> ratings;
+    private List<Integer> ratings; // 4, 5, 6, 7, 8,
+
+    public Book() {
+    }
+
+    public Book(long id, String title, String author, String isbn, int publishedYear, String genre, BigDecimal price, Boolean available, List<Integer> ratings) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.publishedYear = publishedYear;
+        this.genre = genre;
+        this.price = price;
+        this.available = available;
+        this.ratings = ratings;
+    }
 }
