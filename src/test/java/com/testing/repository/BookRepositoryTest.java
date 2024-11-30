@@ -42,6 +42,7 @@ class BookRepositoryTest {
                 Arrays.asList(5, 7, 8, 2, 1)
         );
     }
+
     @DisplayName("Saving book test")
     @Test
     void testSavedBook() {
@@ -94,7 +95,7 @@ class BookRepositoryTest {
         assertThat(updatedBook.getTitle()).isEqualTo("Zmieniony tytuł");
     }
 
-
+    @DisplayName("Testing delete method")
     @Test
     void testDeleteBook() {
         // given
@@ -108,7 +109,7 @@ class BookRepositoryTest {
         assertThat(byId).isNotPresent();
     }
 
-
+    @DisplayName("Finding a book by its genre")
     @Test
     void testFindByGenre() {
         // given
@@ -121,7 +122,8 @@ class BookRepositoryTest {
         assertThat(books).isNotNull();
         assertThat(books.get(0).getGenre()).isEqualTo(genre);
     }
-     @Test
+
+    @Test
     void testFindBooksByAuthorAndPublishedYear() {
         // given
         Book saved = bookRepository.save(book);
@@ -140,11 +142,12 @@ class BookRepositoryTest {
                                 b.getPublishedYear() == publishedYear
         );
     }
+
     @Test
     void testFindBooksByAuthorAndPublishedYearNegativeScenario() {
         // given
         bookRepository.save(book);
-        String author = "Inny autor";
+        String author = "Other autor";
         int publishedYear = 1000;
 
         // when

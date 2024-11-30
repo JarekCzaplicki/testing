@@ -9,6 +9,7 @@ import java.util.Dictionary;
 import java.util.Optional;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+    // https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html
     Optional<Employee> findByEmail(String email);// query made from function name by Spring Data JPA
 
     Optional<Employee> findByFirstNameAndLastName(String firstName, String lastName);
