@@ -1,6 +1,7 @@
 package com.testing.repository;
 
 import com.testing.entity.Book;
+import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,11 +20,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class BookRepositoryTest {
     @Autowired
     private BookRepository bookRepository;
+    @Autowired
+    private EntityManager entityManager;
 
     private Book book;
 
     @BeforeEach
     void setUp() {
+        entityManager.createNativeQuery(
+                "ALTER TABLE books ALTER COLUMN id RESTART WITH 1"
+        ).executeUpdate();
         book = new Book(
                 1L,
                 "Terminator",
